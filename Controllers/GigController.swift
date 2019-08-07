@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+
+class GigController {
+
+	var bearer: Bearer?
+	let baseURL = URL(string: "https://lambdagigs.vapor.cloud/api")
+
+	func signUp(with username: String, password: String, completion: @escaping(Error?) -> Void) {
+		
+	}
+
+
+
+}

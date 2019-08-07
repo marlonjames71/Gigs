@@ -48,7 +48,7 @@ class LoginViewController: UIViewController {
 			!password.isEmpty else { return }
 
 		if loginType == .signUp {
-			gigController?.signUp(with: username, password: password, completion: { (error) in
+			gigController?.createUser(with: username, password: password, completion: { (error) in
 				guard error == nil else { return }
 
 				DispatchQueue.main.async {

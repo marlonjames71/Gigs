@@ -10,16 +10,20 @@ import UIKit
 
 class GigsTableViewController: UITableViewController {
 
-
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		performSegue(withIdentifier: "LoginModalSegue", sender: self)
-	}
+	private let gigController = GigController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		tableView.tableFooterView = UIView()
     }
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+
+		if gigController.bearer == nil {
+			performSegue(withIdentifier: "LoginModalSegue", sender: self)
+		}
+	}
 
     // MARK: - Table view data source
 

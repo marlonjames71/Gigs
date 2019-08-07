@@ -64,7 +64,7 @@
                                 </segments>
                                 <color key="tintColor" red="0.39032968770583282" green="0.57478585229013313" blue="0.62168666622334223" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <action selector="segControlValueChanged:" destination="eph-At-648" eventType="valueChanged" id="O9s-ke-bE2"/>
+                                    <action selector="signInTypeChanged:" destination="eph-At-648" eventType="valueChanged" id="O9s-ke-bE2"/>
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ds7-pL-akY">

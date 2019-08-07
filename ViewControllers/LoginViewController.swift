@@ -8,13 +8,20 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+enum LoginType {
+	case signUp
+	case logIn
+}
 
+class LoginViewController: UIViewController {
 
 	@IBOutlet weak var segControl: UISegmentedControl!
 	@IBOutlet weak var usernameTextField: UITextField!
 	@IBOutlet weak var passwordTextField: UITextField!
 	@IBOutlet weak var button: UIButton!
+
+	var gigController: GigController?
+	var loginType: LoginType = .signUp
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +31,45 @@ class LoginViewController: UIViewController {
 		button.layer.cornerRadius = 8
     }
     
-	@IBAction func segControlValueChanged(_ sender: UISegmentedControl) {
+	@IBAction func signInTypeChanged(_ sender: UISegmentedControl) {
+		if segControl.selectedSegmentIndex == 0 {
+			loginType = .signUp
+			button.setTitle("Sign Up", for: .normal)
+		} else {
+			loginType = .logIn
+			button.setTitle("Sign In", for: .normal)
+		}
 	}
 
 	@IBAction func buttonTapped(_ sender: UIButton) {
+		guard let username = usernameTextField.text,
+			let password = passwordTextField.text,
+			!username.isEmpty,
+			!password.isEmpty else { return }
+
+		if loginType == .signUp {
+			gigController?.signUp(with: username, password: password, completion: { (error) in
+				guard error == nil else { return }
+
+				DispatchQueue.main.async {
+					let alert = UIAlertController(title: "Sign Up Successful!", message: "Please log in now", preferredStyle: .alert)
+					alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+						self.loginType = .logIn
+						self.segControl.selectedSegmentIndex = 1
+						self.button.setTitle("Sign In", for: .normal)
+					}))
+					self.present(alert, animated: true, completion: nil)
+				}
+			})
+		} else {
+			gigController?.logIn(with: username, password: password, completion: { (error) in
+				guard error == nil else { return }
+
+				DispatchQueue.main.async {
+					self.dismiss(animated: true, completion: nil)
+				}
+			})
+		}
 	}
 
 

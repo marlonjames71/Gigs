@@ -28,14 +28,28 @@ class GigDetailViewController: UIViewController {
     
 	@IBAction func saveTapped(_ sender: UIBarButtonItem) {
 		guard let title = titleTextField.text,
-			let details = detailsTextView.text else { return }
+			let details = detailsTextView.text,
+			let gigController = gigController else { return }
 
 		let gig = Gig(title: title, description: details, dueDate: datePicker.date)
-		gigController?.createGig(gig: gig, completion: { (_) in
-			DispatchQueue.main.async {
-				self.navigationController?.popToRootViewController(animated: true)
-			}
-		})
+
+		let gigs = gigController.gigs.filter( { $0 == gig })
+		print(gigs.count)
+
+		if gigs != [] {
+			let alert = UIAlertController(title: "Gig already exists",
+										  message: "Please make sure to enter new information",
+										  preferredStyle: .alert)
+			let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+			alert.addAction(action)
+			present(alert, animated: true, completion: nil)
+		} else {
+			gigController.createGig(gig: gig, completion: { (_) in
+				DispatchQueue.main.async {
+					self.navigationController?.popToRootViewController(animated: true)
+				}
+			})
+		}
 	}
 
 	func updateViews() {
@@ -45,14 +59,9 @@ class GigDetailViewController: UIViewController {
 		detailsTextView.text = gig.description
 	}
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
+    }
 }

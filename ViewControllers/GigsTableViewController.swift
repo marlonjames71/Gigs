@@ -22,25 +22,33 @@ class GigsTableViewController: UITableViewController {
 
 		if gigController.bearer == nil {
 			performSegue(withIdentifier: "LoginModalSegue", sender: self)
+		} else {
+			gigController.fetchAllGigs { (_) in
+				DispatchQueue.main.async {
+					self.tableView.reloadData()
+				}
+			}
 		}
 	}
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        let gigs = gigController.gigs
+        return gigs.count
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        // Configure the cell...
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GigCell", for: indexPath)
+
+		let gig = gigController.gigs[indexPath.row]
+
+		cell.textLabel?.text = gig.title
+		cell.detailTextLabel?.text = ("\(gig.dueDate)")
 
         return cell
     }
-    */
 
 
     // MARK: - Navigation
@@ -50,6 +58,18 @@ class GigsTableViewController: UITableViewController {
 		if segue.identifier == "LoginModalSegue" {
 			guard let loginVC = segue.destination as? LoginViewController else { return }
 			loginVC.gigController = gigController
+		}
+
+		if segue.identifier == "GigDetailSegue" {
+			if let detailVC = segue.destination as? GigDetailViewController,
+				let indexPath = tableView.indexPathForSelectedRow {
+				detailVC.gig = gigController.gigs[indexPath.row]
+				detailVC.gigController = gigController
+			}
+		} else if segue.identifier == "AddGigSegue" {
+			if let addVC = segue.destination as? GigDetailViewController {
+				addVC.gigController = gigController
+			}
 		}
     }
 }

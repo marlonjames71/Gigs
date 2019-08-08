@@ -104,7 +104,7 @@
             </objects>
             <point key="canvasLocation" x="438" y="-536"/>
         </scene>
-        <!--Gigs Table View Controller-->
+        <!--All Gigs-->
         <scene sceneID="jor-9Q-4dM">
             <objects>
                 <tableViewController id="dPm-Pa-9X4" customClass="GigsTableViewController" customModule="Gigs" customModuleProvider="target" sceneMemberID="viewController">
@@ -113,11 +113,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GigCell" textLabel="CCe-Ea-HOw" detailTextLabel="9Sl-zo-fKF" style="IBUITableViewCellStyleValue1" id="EUW-wL-Pcl">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="GigCell" textLabel="CCe-Ea-HOw" detailTextLabel="9Sl-zo-fKF" style="IBUITableViewCellStyleValue1" id="EUW-wL-Pcl">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EUW-wL-Pcl" id="1uX-C3-eiZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CCe-Ea-HOw">
@@ -128,7 +128,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Sl-zo-fKF">
-                                            <rect key="frame" x="350" y="12" width="44" height="20.5"/>
+                                            <rect key="frame" x="332" y="12" width="44" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -136,6 +136,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="YLZ-eM-Gs4" kind="show" identifier="GigDetailSegue" id="Upd-JD-zmM"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -143,7 +146,13 @@
                             <outlet property="delegate" destination="dPm-Pa-9X4" id="4Bf-52-Va9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="fn5-YU-Ep4"/>
+                    <navigationItem key="navigationItem" title="All Gigs" id="fn5-YU-Ep4">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="u9x-vc-0X7">
+                            <connections>
+                                <segue destination="YLZ-eM-Gs4" kind="show" identifier="AddGigSegue" id="UGx-EI-tSn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="eph-At-648" kind="presentation" identifier="LoginModalSegue" id="Ta3-Yf-lGe"/>
                     </connections>
@@ -152,14 +161,98 @@
             </objects>
             <point key="canvasLocation" x="-323" y="141"/>
         </scene>
+        <!--Gig Detail-->
+        <scene sceneID="TLE-pH-E3a">
+            <objects>
+                <viewController title="Gig Detail" id="YLZ-eM-Gs4" customClass="GigDetailViewController" customModule="Gigs" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="y0a-ds-u5s">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Gig Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4BZ-eq-UTs">
+                                <rect key="frame" x="40" y="160" width="334" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="EAt-yQ-0Dy">
+                                <rect key="frame" x="0.0" y="210" width="414" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="afC-d1-Xb1"/>
+                                </constraints>
+                                <date key="date" timeIntervalSinceReferenceDate="586990374.15292799">
+                                    <!--2019-08-08 20:52:54 +0000-->
+                                </date>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peB-er-nGj">
+                                <rect key="frame" x="172" y="326" width="70" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TLe-Pb-dJ4">
+                                <rect key="frame" x="40" y="382" width="334" height="130"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="scrollIndicatorInsets" minX="12" minY="10" maxX="12" maxY="10"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uvJ-e1-Z1a">
+                                <rect key="frame" x="40" y="357" width="334" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="jzX-Fo-QGU" firstAttribute="trailing" secondItem="TLe-Pb-dJ4" secondAttribute="trailing" constant="40" id="1So-mJ-3Fb"/>
+                            <constraint firstItem="TLe-Pb-dJ4" firstAttribute="top" secondItem="peB-er-nGj" secondAttribute="bottom" constant="35" id="2Rj-Jc-7kj"/>
+                            <constraint firstItem="jzX-Fo-QGU" firstAttribute="trailing" secondItem="4BZ-eq-UTs" secondAttribute="trailing" constant="40" id="3hE-5u-ybs"/>
+                            <constraint firstItem="TLe-Pb-dJ4" firstAttribute="leading" secondItem="jzX-Fo-QGU" secondAttribute="leading" constant="40" id="4PM-5y-0V2"/>
+                            <constraint firstItem="jzX-Fo-QGU" firstAttribute="trailing" secondItem="uvJ-e1-Z1a" secondAttribute="trailing" constant="40" id="7xV-Cm-LHc"/>
+                            <constraint firstItem="4BZ-eq-UTs" firstAttribute="leading" secondItem="jzX-Fo-QGU" secondAttribute="leading" constant="40" id="BzC-gx-BC3"/>
+                            <constraint firstItem="EAt-yQ-0Dy" firstAttribute="top" secondItem="4BZ-eq-UTs" secondAttribute="bottom" constant="20" id="HlF-GR-gVn"/>
+                            <constraint firstItem="jzX-Fo-QGU" firstAttribute="bottom" secondItem="TLe-Pb-dJ4" secondAttribute="bottom" constant="350" id="J4c-XA-uJT"/>
+                            <constraint firstItem="TLe-Pb-dJ4" firstAttribute="top" secondItem="uvJ-e1-Z1a" secondAttribute="bottom" constant="8" id="MjL-Lc-ohc"/>
+                            <constraint firstItem="4BZ-eq-UTs" firstAttribute="top" secondItem="jzX-Fo-QGU" secondAttribute="top" constant="20" id="ST2-Jb-0kX"/>
+                            <constraint firstItem="peB-er-nGj" firstAttribute="top" secondItem="EAt-yQ-0Dy" secondAttribute="bottom" constant="16" id="VAh-mC-XC0"/>
+                            <constraint firstItem="EAt-yQ-0Dy" firstAttribute="leading" secondItem="jzX-Fo-QGU" secondAttribute="leading" id="Wys-Db-P7H"/>
+                            <constraint firstItem="peB-er-nGj" firstAttribute="centerX" secondItem="y0a-ds-u5s" secondAttribute="centerX" id="fs7-fS-CRG"/>
+                            <constraint firstItem="EAt-yQ-0Dy" firstAttribute="trailing" secondItem="jzX-Fo-QGU" secondAttribute="trailing" id="grI-hL-5ii"/>
+                            <constraint firstItem="uvJ-e1-Z1a" firstAttribute="leading" secondItem="jzX-Fo-QGU" secondAttribute="leading" constant="40" id="oSp-Sd-W2N"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jzX-Fo-QGU"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Gig Detail" id="4Om-E7-ZFB">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="efx-or-U1O">
+                            <connections>
+                                <action selector="saveTapped:" destination="YLZ-eM-Gs4" id="z28-Fp-H7K"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="EAt-yQ-0Dy" id="bJa-1w-cBc"/>
+                        <outlet property="detailsLabel" destination="uvJ-e1-Z1a" id="8G8-At-aNR"/>
+                        <outlet property="detailsTextView" destination="TLe-Pb-dJ4" id="d09-Yg-M6O"/>
+                        <outlet property="dueDateLabel" destination="peB-er-nGj" id="Hk0-h4-z7j"/>
+                        <outlet property="titleTextField" destination="4BZ-eq-UTs" id="9Qi-Lt-eBt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Evp-qg-ycX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="524.63768115942037" y="140.625"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZLj-Ps-RYT">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="W2W-hl-NiJ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ZrJ-Az-GRn">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ZrJ-Az-GRn">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.43435344817601396" blue="0.52035538741922438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.072898850350000002" green="0.29156804050000001" blue="0.3605711734" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -171,4 +264,7 @@
             <point key="canvasLocation" x="-1135" y="141"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Upd-JD-zmM"/>
+    </inferredMetricsTieBreakers>
 </document>

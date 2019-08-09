@@ -31,6 +31,12 @@ class GigsTableViewController: UITableViewController {
 		}
 	}
 
+	var dateFormatter: DateFormatter = {
+		var formatter = DateFormatter()
+		formatter.dateFormat = "MMM dd, YYYY"
+		return formatter
+	}()
+
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -45,7 +51,7 @@ class GigsTableViewController: UITableViewController {
 		let gig = gigController.gigs[indexPath.row]
 
 		cell.textLabel?.text = gig.title
-		cell.detailTextLabel?.text = ("\(gig.dueDate)")
+		cell.detailTextLabel?.text = dateFormatter.string(from: gig.dueDate)
 
         return cell
     }

@@ -24,6 +24,10 @@ class GigDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		updateViews()
+
+		detailsTextView.layer.borderWidth = 2
+		detailsTextView.layer.borderColor = #colorLiteral(red: 0.07289885035, green: 0.2915680405, blue: 0.3605711734, alpha: 0.6397502876)
+		detailsTextView.layer.cornerRadius = 8
     }
     
 	@IBAction func saveTapped(_ sender: UIBarButtonItem) {
